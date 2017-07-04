@@ -1,0 +1,7 @@
+---
+- hosts: all
+  remote_user: root
+  roles:
+    - T2L.java
+    - ansible-role-solr
+  vars:
