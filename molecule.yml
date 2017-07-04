@@ -8,11 +8,11 @@ driver:
   name: docker
 docker:
   containers:
-    - name: ansible-role-php-ubuntu-14.04
+    - name: ansible-role-solr-ubuntu-14.04
       image: ubuntu
       image_version: '14.04'
       privileged: true
-    - name: ansible-role-php-ubuntu-16.04
+    - name: ansible-role-solr-ubuntu-16.04
       image: ubuntu
       image_version: '16.04'
       privileged: true
