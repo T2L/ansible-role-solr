@@ -1,10 +1,10 @@
 ---
-
-- name: Make solr group exists
+# Create Solr group if doesn't exist.
+- name: Make sure solr group exists
   group:
     name: "{{ solr_user_group }}"
     state: present
-
+# Create Solr user if doesn't exist.
 - name: Make sure solr user exists
   user:
     name: "{{ solr_user }}"

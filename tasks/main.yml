@@ -1,5 +1,3 @@
 ---
-#
+# Create Solr user and group.
 - include: solr-user.yml
-  when:
-    solr_user is not empty

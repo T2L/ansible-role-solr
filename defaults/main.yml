@@ -1,4 +1,4 @@
 ---
-# Solr user and group. Set user to an empty string "" to skip creating a user.
+# Solr user and group. Defaults to solr:solr.
 solr_user: solr
 solr_user_group: "{{ solr_user }}"
