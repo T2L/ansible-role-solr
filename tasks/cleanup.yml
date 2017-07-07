@@ -1,0 +1,9 @@
+---
+- name: Remove downloaded archive and extracted files
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - '{{ solr_download_dest }}'
+    - '{{ solr_download_dir }}/solr-{{ solr_version }}'
+  when: solr_cleanup_downloads

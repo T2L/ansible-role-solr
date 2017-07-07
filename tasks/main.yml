@@ -1,3 +1,23 @@
 ---
+# Ensure base packages are present.
+- name: Install base packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 86400
+  with_items:
+    - curl
+    - lsof
+
 # Create Solr user and group.
-- include: solr-user.yml
+- include: user.yml
+
+# Install Solr.
+- include: install.yml
+
+# Configure Solr cores.
+- include: cores.yml
+
+# Clean up.
+- include: cleanup.yml

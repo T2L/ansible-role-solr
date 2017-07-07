@@ -1,0 +1,64 @@
+---
+# Oneliner borrowed here: https://github.com/jiv-e/ansible-multicore-solr/blob/master/roles/jiv_e.solr/tasks/install-solr.yml#L15
+- name: Get the closest mirror for Apache Solr
+  shell: >
+    curl -s http://www.apache.org/dyn/closer.cgi/lucene/solr |
+    sed -n '/id="http"/,/id="backup"/p' |
+    sed -nr 's/.*href=\"(.*)\".*/\1/p' |
+    sed -n '2,${/https\?:\/\//p;q}'
+  register: solr_closest_mirror
+  changed_when: false
+
+# Make sure all directories exist
+- name: Make sure all directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - '{{ solr_download_dir }}'
+    - '{{ solr_install_dir }}'
+    - '{{ solr_data_dir }}'
+
+- name: Set download destination
+  set_fact:
+    solr_download_dest: '{{ solr_download_dir }}/solr-{{ solr_version }}.tgz'
+  changed_when: false
+
+# Download Solr from the closest mirror (won't work for archive releases).
+- name: Download Solr from the closest mirror
+  get_url:
+    url: '{{ solr_closest_mirror.stdout }}/{{ solr_version }}/solr-{{ solr_version }}.tgz'
+    dest: '{{ solr_download_dest }}'
+  register: solr_closest_mirror_result
+  failed_when: false
+
+# Download Solr from the archive as backup.
+- name: Download Solr from the archive
+  get_url:
+    url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
+    dest: '{{ solr_download_dest }}'
+  when: solr_closest_mirror_result.state == 'absent'
+
+- name: Unpack Solr
+  unarchive:
+    src: '{{ solr_download_dest }}'
+    dest: '{{ solr_download_dir }}'
+    remote_src: true
+    creates: '{{ solr_download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh'
+
+- name: Run Solr installation script
+  command: >
+    {{ solr_download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh
+    {{ solr_download_dest }}
+    -d {{ solr_data_dir }}
+    -i {{ solr_install_dir }}
+    -p {{ solr_port }}
+    -u {{ solr_user }}
+  args:
+    creates: '{{ solr_install_dir }}/solr/bin/solr'
+
+- name: Ensure solr is started and enabled on boot
+  service:
+    name: solr
+    state: started
+    enabled: yes

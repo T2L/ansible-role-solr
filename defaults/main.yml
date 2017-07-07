@@ -1,4 +1,26 @@
 ---
 # Solr user and group. Defaults to solr:solr.
 solr_user: solr
-solr_user_group: "{{ solr_user }}"
+solr_group: "{{ solr_user }}"
+
+# Solr version to install. Minimum supported version is 5.0.0.
+solr_version: 6.6.0
+
+# Port Solr should bind to.
+solr_port: 8983
+
+# Download Solr here.
+solr_download_dir: /tmp
+
+# Solr install directory.
+solr_install_dir: /opt
+
+# Solr data directory.
+solr_data_dir: /var/solr
+
+# Remove downloaded archive and extracted files.
+solr_cleanup_downloads: true
+
+# Solr cores to configure.
+solr_cores: []
+#  - drupal
