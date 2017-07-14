@@ -39,6 +39,23 @@
     dest: '{{ solr_download_dest }}'
   when: solr_closest_mirror_result.state == 'absent'
 
+- name: Download the keys as well as the .asc signature file
+  get_url:
+    url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/{{ item }}
+    dest: '{{ solr_download_dir }}/{{ item }}'
+    force: true
+  with_items:
+    - KEYS
+    - solr-{{ solr_version }}.tgz.asc
+
+- name: Import GPG keys
+  command: gpg --import {{ solr_download_dir }}/KEYS
+  changed_when: false
+
+- name: Verify the signatures
+  command: gpg --verify {{ solr_download_dir }}/solr-{{ solr_version }}.tgz.asc {{ solr_download_dest }}
+  changed_when: false
+
 - name: Unpack Solr
   unarchive:
     src: '{{ solr_download_dest }}'

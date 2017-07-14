@@ -21,6 +21,9 @@ solr_data_dir: /var/solr
 # Remove downloaded archive and extracted files.
 solr_cleanup_downloads: true
 
+# Remove downloaded GPG keys file and .asc signature file.
+solr_cleanup_gpg: true
+
 # Solr cores to configure.
 solr_cores: []
 #  - drupal

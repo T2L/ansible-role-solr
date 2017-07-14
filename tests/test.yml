@@ -6,6 +6,7 @@
   vars:
     # Do not remove downloads in order to pass idempotence tests.
     solr_cleanup_downloads: false
+    solr_cleanup_gpg: false
 
     # Solr cores to configure.
     solr_cores:
