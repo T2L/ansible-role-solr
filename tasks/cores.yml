@@ -20,7 +20,7 @@
 
 - name: Create configured cores
   command: '{{ solr_install_dir }}/solr/bin/solr create -c {{ item.1 }}'
-  when: solr_cores_configuration.results[item.0].changed
+  when: "'skipped' not in solr_cores_configuration.results[item.0].stdout"
   with_indexed_items: '{{ solr_cores }}'
   become: yes
   become_user: '{{ solr_user }}'

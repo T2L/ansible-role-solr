@@ -6,6 +6,10 @@
     sed -n '/id="http"/,/id="backup"/p' |
     sed -nr 's/.*href=\"(.*)\".*/\1/p' |
     sed -n '2,${/https\?:\/\//p;q}'
+  # Skip Ansible Lint check, as it not really possible to achieve the same
+  # functionality with modules.
+  args:
+    warn: false
   register: solr_closest_mirror
   changed_when: false
 
