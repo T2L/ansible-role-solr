@@ -1,3 +1,5 @@
+## Ansible Role: Apache Solr 1.x.x
+
 ## Ansible Role: Apache Solr 1.1.0, 2017-07-27
 
 - Add Solr bin directory to global $PATH
