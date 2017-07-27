@@ -10,6 +10,3 @@ galaxy_info:
       versions:
         - trusty
         - xenial
-dependencies:
-  - name: T2L.java
-    version: 1.0.1

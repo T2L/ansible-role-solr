@@ -61,10 +61,6 @@ Example (do not forget to remove square brackets):
     solr_cores:
       - drupal
 
-## Dependencies
-
-- T2L.java
-
 ## Example Playbook
 
     - hosts: all
