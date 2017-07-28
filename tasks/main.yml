@@ -22,3 +22,4 @@
 
 # Clean up.
 - include: cleanup.yml
+  when: solr_existing_version|failed
