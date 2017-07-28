@@ -4,7 +4,7 @@
 
 Installs Apache Solr 5+ on Ubuntu LTS.
 
-## What is so special about this Java role
+## What is so special about this Apache Solr role
 
 - Fast downloads: tries to download Solr from the closest mirror (works for latest releases only), fallback to archive
 - Verification of the integrity of the files
