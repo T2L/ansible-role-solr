@@ -1,3 +1,5 @@
+## Ansible Role: Apache Solr 1.x.x
+
 ## Ansible Role: Apache Solr 1.1.1, 2017-07-28
 
 - Fixed 'solr_download_dest is undefined' error in 'Remove downloaded archive and extracted files' task
