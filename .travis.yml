@@ -13,7 +13,7 @@ before_install:
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
 install:
   - pip install docker
-  - pip install molecule
+  - pip install 'molecule<2.0.0'
 script:
   - molecule test
 
