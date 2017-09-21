@@ -11,15 +11,15 @@
     - gnupg2
     - lsof
 
-# Create Solr user and group.
-- include: user.yml
+- name: Create Solr user and group
+  include_tasks: user.yml
 
-# Install Solr.
-- include: install.yml
+- name: Install Solr
+  include_tasks: install.yml
 
-# Configure Solr cores.
-- include: cores.yml
+- name: Configure Solr cores
+  include_tasks: cores.yml
 
-# Clean up.
-- include: cleanup.yml
+- name: Clean up
+  include_tasks: cleanup.yml
   when: solr_existing_version|failed
