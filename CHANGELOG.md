@@ -1,4 +1,7 @@
-## Ansible Role: Apache Solr 1.x.x
+## Ansible Role: Apache Solr 1.2.0, 2017-09-21
+
+- Make sure Travis uses Molecule < 2.0.0
+- Bump minimum supported Ansible version to 2.4
 
 ## Ansible Role: Apache Solr 1.1.1, 2017-07-28
 
