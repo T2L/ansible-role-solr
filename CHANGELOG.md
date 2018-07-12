@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr 1.x.x
+## Ansible Role: Apache Solr 1.3.0, 2018-07-12
 
 - Bump default Solr version to 6.6.5
 - Fixed [DEPRECATION WARNING]: Using tests as filters is deprecated. Instead of using `result|failed` use `result is failed`
