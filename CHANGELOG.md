@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr 1.x.x
+
+- Bump default Solr version to 6.6.5
+
 ## Ansible Role: Apache Solr 1.2.0, 2017-09-21
 
 - Make sure Travis uses Molecule < 2.0.0

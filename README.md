@@ -26,7 +26,7 @@ Solr user and group. Defaults to solr:solr.
 
 Solr version to install. Minimum supported version is 5.0.0.
 
-    solr_version: 6.6.1
+    solr_version: 6.6.5
 
 Port Solr should bind to.
 
