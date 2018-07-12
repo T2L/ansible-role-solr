@@ -22,4 +22,4 @@
 
 - name: Clean up
   include_tasks: cleanup.yml
-  when: solr_existing_version|failed
+  when: solr_existing_version is failed
