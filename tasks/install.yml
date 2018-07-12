@@ -99,6 +99,7 @@
     name: solr
     state: started
     enabled: yes
+    use: service
 
 - name: Add Solr bin directory to global $PATH
   template:

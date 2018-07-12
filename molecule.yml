@@ -16,3 +16,7 @@ docker:
       image: ubuntu
       image_version: '16.04'
       privileged: true
+    - name: ansible-role-solr-ubuntu-18.04
+      image: ubuntu
+      image_version: '18.04'
+      privileged: true
