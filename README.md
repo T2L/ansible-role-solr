@@ -8,7 +8,7 @@ Installs Apache Solr 5+ on Ubuntu LTS.
 
 - Fast downloads: tries to download Solr from the closest mirror (works for latest releases only), fallback to archive
 - Verification of the integrity of the files
-- Supports Ubuntu 14.04 and 16.04 only
+- Supports Ubuntu 14.04, 16.04 and 18.04 only
 - Testing with [Molecule](https://github.com/metacloud/molecule)
 
 ## Requirements
