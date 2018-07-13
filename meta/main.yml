@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: T2L.solr
+  role_name: solr
   author: Roman Paska
   description: Install Apache Solr.
   company: Lemberg Solutions
