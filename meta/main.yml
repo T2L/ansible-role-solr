@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: T2L.solr
   author: Roman Paska
   description: Install Apache Solr.
   company: Lemberg Solutions
@@ -11,3 +12,10 @@ galaxy_info:
         - trusty
         - xenial
         - bionic
+  galaxy_tags:
+    - development
+    - apache
+    - lucene
+    - solr
+    - search
+dependencies: []
