@@ -1,6 +1,6 @@
 # Ansible Role: Apache Solr
 
-[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=1.3.1)](https://travis-ci.org/T2L/ansible-role-solr)
+[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=1.4.0)](https://travis-ci.org/T2L/ansible-role-solr)
 
 Installs Apache Solr 5+ on Ubuntu LTS.
 
@@ -73,7 +73,7 @@ MIT
 
 ## Author Information
 
-This role was created in 2017 by Roman Paska.
+This role was created in 2017-2018 by Roman Paska.
 
 ## Changelog
 
