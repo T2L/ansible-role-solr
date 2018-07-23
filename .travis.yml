@@ -3,6 +3,15 @@ sudo: required
 
 language: python
 
+env:
+  - GUEST_OS=ubuntu-14.04
+  - GUEST_OS=ubuntu-16.04
+  - GUEST_OS=ubuntu-18.04
+
+matrix:
+  allow_failures:
+    - env: GUEST_OS=ubuntu-14.04
+
 cache: pip
 
 services:
@@ -11,9 +20,14 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
+
 install:
   - pip install docker
   - pip install 'molecule<2.0.0'
+
+before_script:
+  - cp ./tests/molecule-${GUEST_OS}.yml ./molecule.yml
+
 script:
   - molecule test
 
