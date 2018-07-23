@@ -17,10 +17,6 @@ cache: pip
 services:
   - docker
 
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
-
 install:
   - pip install docker
   - pip install 'molecule<2.0.0'
