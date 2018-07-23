@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr 1.x.x
+
+- Upgrade Solr when required version has changed instead of skipping installation
+
 ## Ansible Role: Apache Solr 1.3.1, 2018-07-14
 
 - Updated Ansible Galaxy metadata and README files
