@@ -6,6 +6,10 @@
   changed_when: false
   failed_when: false
 
+- name: Check if Solr needs to be installed
+  set_fact:
+    solr_needs_install: "{{ solr_existing_version.rc != 0 or solr_existing_version.stdout != solr_version }}"
+
 # Oneliner borrowed here: https://github.com/jiv-e/ansible-multicore-solr/blob/master/roles/jiv_e.solr/tasks/install-solr.yml#L15
 - name: Get the closest mirror for Apache Solr
   shell: >
@@ -19,7 +23,7 @@
     warn: false
   register: solr_closest_mirror
   changed_when: false
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 # Make sure all directories exist
 - name: Make sure all directories exist
@@ -30,13 +34,13 @@
     - '{{ solr_download_dir }}'
     - '{{ solr_install_dir }}'
     - '{{ solr_data_dir }}'
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 - name: Set download destination
   set_fact:
     solr_download_dest: '{{ solr_download_dir }}/solr-{{ solr_version }}.tgz'
   changed_when: false
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 # Download Solr from the closest mirror (won't work for archive releases).
 - name: Download Solr from the closest mirror
@@ -45,14 +49,14 @@
     dest: '{{ solr_download_dest }}'
   register: solr_closest_mirror_result
   failed_when: false
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 # Download Solr from the archive as backup.
 - name: Download Solr from the archive
   get_url:
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
-  when: solr_existing_version.rc != 0 and solr_closest_mirror_result.state == 'absent'
+  when: solr_needs_install and solr_closest_mirror_result.state == 'absent'
 
 - name: Download the keys as well as the .asc signature file
   get_url:
@@ -62,17 +66,17 @@
   with_items:
     - KEYS
     - solr-{{ solr_version }}.tgz.asc
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 - name: Import GPG keys
   command: gpg --import {{ solr_download_dir }}/KEYS
   changed_when: false
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 - name: Verify the signatures
   command: gpg --verify {{ solr_download_dir }}/solr-{{ solr_version }}.tgz.asc {{ solr_download_dest }}
   changed_when: false
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 - name: Unpack Solr
   unarchive:
@@ -80,7 +84,7 @@
     dest: '{{ solr_download_dir }}'
     remote_src: true
     creates: '{{ solr_download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh'
-  when: solr_existing_version.rc != 0
+  when: solr_needs_install
 
 - name: Run Solr installation script
   command: >
@@ -90,9 +94,8 @@
     -i {{ solr_install_dir }}
     -p {{ solr_port }}
     -u {{ solr_user }}
-  args:
-    creates: '{{ solr_install_dir }}/solr/bin/solr'
-  when: solr_existing_version.rc != 0
+    -f
+  when: solr_needs_install
 
 - name: Ensure solr is started and enabled on boot
   service:
