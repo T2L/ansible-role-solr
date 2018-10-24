@@ -1,24 +1,28 @@
 ---
 - name: Ensure Solr conf directories exist
   file:
-    path: '{{ solr_data_dir }}/data/{{ item }}/conf'
+    path: '{{ solr_data_dir }}/data/{{ item.name }}/conf'
     state: directory
     owner: '{{ solr_user }}'
     group: '{{ solr_group }}'
     recurse: true
   loop: '{{ solr_cores }}'
 
+- name: Set default core configuration path
+  set_fact:
+    solr_default_core_conf_path: '{{ solr_install_dir }}/solr/example/files/conf/'
+
 - name: Copy default configuration for all cores
-  command: 'cp -R {{ solr_install_dir }}/solr/example/files/conf/ {{ solr_data_dir }}/data/{{ item }}/'
+  command: 'cp -R {{ item.conf_path | default(solr_default_core_conf_path) }} {{ solr_data_dir }}/data/{{ item.name }}/'
   args:
-    creates: '{{ solr_data_dir }}/data/{{ item }}/conf/solrconfig.xml'
+    creates: '{{ solr_data_dir }}/data/{{ item.name }}/conf/solrconfig.xml'
   loop: '{{ solr_cores }}'
   register: solr_cores_configuration
   become: yes
   become_user: '{{ solr_user }}'
 
 - name: Create configured cores
-  command: '{{ solr_install_dir }}/solr/bin/solr create -c {{ item }}'
+  command: '{{ solr_install_dir }}/solr/bin/solr create -c {{ item.name }}'
   when: "'skipped' not in solr_cores_configuration.results[index].stdout"
   loop: '{{ solr_cores }}'
   loop_control:
