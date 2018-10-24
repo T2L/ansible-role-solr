@@ -11,5 +11,6 @@
 
     # Solr cores to configure.
     solr_cores:
-      - drupal
-      - wordpress
+      - name: drupal
+      - name: wordpress
+        conf_path: /opt/solr/example/files/conf/

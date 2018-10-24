@@ -26,4 +26,6 @@ solr_cleanup_gpg: true
 
 # Solr cores to configure.
 solr_cores: []
-#  - drupal
+#  - name: main
+#  - name: extra
+#    conf_path: /var/www/project/config/solr

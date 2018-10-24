@@ -1,6 +1,6 @@
 # Ansible Role: Apache Solr
 
-[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=1.4.0)](https://travis-ci.org/T2L/ansible-role-solr)
+[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=2.x.x)](https://travis-ci.org/T2L/ansible-role-solr)
 
 Installs Apache Solr 5+ on Ubuntu LTS.
 
@@ -52,14 +52,21 @@ Whether to remove downloaded GPG keys file and .asc signature file after the ins
 
     solr_cleanup_gpg: true
 
-List of Solr cores to configure.
+List of Solr cores to configure. Possible keys:
 
-    solr_cores: []
+- **name**: Solr core name
+- **conf_path**: (optional) System path to a directory with core configuration. If omitted, default Solr core configuration will be used
+
+```
+solr_cores: []
+```
 
 Example (do not forget to remove square brackets):
 
     solr_cores:
-      - drupal
+      - name: main
+      - name: extra
+        conf_path: /var/www/project/config/solr
 
 ## Example Playbook
 
