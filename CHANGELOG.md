@@ -4,6 +4,7 @@
 - Fixed _Invoking "apt" only once while using a loop via squash_actions is deprecated._
 - Use `loop` keyword instead of `with_<lookup>`
 - Added ability to specify directory with configuration per core (if omitted, Solr default configuration will be used)
+- Updated test dependency on T2L.java to 1.1.0
 
 ## Ansible Role: Apache Solr 1.4.0, 2018-07-23
 
