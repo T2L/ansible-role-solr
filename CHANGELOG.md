@@ -2,6 +2,7 @@
 
 - Bump minimum supported Ansible version to 2.5
 - Fixed _Invoking "apt" only once while using a loop via squash_actions is deprecated._
+- Use `loop` keyword instead of `with_<lookup>`
 
 ## Ansible Role: Apache Solr 1.4.0, 2018-07-23
 

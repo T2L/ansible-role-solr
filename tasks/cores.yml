@@ -6,21 +6,22 @@
     owner: '{{ solr_user }}'
     group: '{{ solr_group }}'
     recurse: true
-  with_items:
-    '{{ solr_cores }}'
+  loop: '{{ solr_cores }}'
 
 - name: Copy default configuration for all cores
   command: 'cp -R {{ solr_install_dir }}/solr/example/files/conf/ {{ solr_data_dir }}/data/{{ item }}/'
   args:
     creates: '{{ solr_data_dir }}/data/{{ item }}/conf/solrconfig.xml'
-  with_items: '{{ solr_cores }}'
+  loop: '{{ solr_cores }}'
   register: solr_cores_configuration
   become: yes
   become_user: '{{ solr_user }}'
 
 - name: Create configured cores
-  command: '{{ solr_install_dir }}/solr/bin/solr create -c {{ item.1 }}'
-  when: "'skipped' not in solr_cores_configuration.results[item.0].stdout"
-  with_indexed_items: '{{ solr_cores }}'
+  command: '{{ solr_install_dir }}/solr/bin/solr create -c {{ item }}'
+  when: "'skipped' not in solr_cores_configuration.results[index].stdout"
+  loop: '{{ solr_cores }}'
+  loop_control:
+    index_var: index
   become: yes
   become_user: '{{ solr_user }}'
