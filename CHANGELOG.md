@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr 1.x.x
+## Ansible Role: Apache Solr 1.4.0, 2018-07-23
 
 - Upgrade Solr when required version has changed instead of skipping installation
 
