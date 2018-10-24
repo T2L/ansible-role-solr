@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr 2.x.x
+## Ansible Role: Apache Solr 2.0.0, 2018-10-24
 
 - Bump minimum supported Ansible version to 2.5
 - Fixed _Invoking "apt" only once while using a loop via squash_actions is deprecated._
