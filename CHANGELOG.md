@@ -5,6 +5,7 @@
 - Use `loop` keyword instead of `with_<lookup>`
 - Added ability to specify directory with configuration per core (if omitted, Solr default configuration will be used)
 - Updated test dependency on T2L.java to 1.1.0
+- Added upgrade instructions
 
 ## Ansible Role: Apache Solr 1.4.0, 2018-07-23
 

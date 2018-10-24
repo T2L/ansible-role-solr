@@ -85,3 +85,7 @@ This role was created in 2017-2018 by Roman Paska.
 ## Changelog
 
 Changelog can be found here [CHANGELOG.md](CHANGELOG.md)
+
+## Upgrade
+
+Upgrade instructions can be found here [UPGRADE.md](/UPGRADE.md)
