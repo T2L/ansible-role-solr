@@ -2,14 +2,13 @@
 # Ensure base packages are present.
 - name: Install base packages
   apt:
-    name: "{{ item }}"
+    name:
+      - curl
+      - gnupg2
+      - lsof
     state: present
     update_cache: yes
     cache_valid_time: 86400
-  with_items:
-    - curl
-    - gnupg2
-    - lsof
 
 - name: Create Solr user and group
   include_tasks: user.yml
