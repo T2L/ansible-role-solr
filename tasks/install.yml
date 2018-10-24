@@ -30,7 +30,7 @@
   file:
     path: "{{ item }}"
     state: directory
-  with_items:
+  loop:
     - '{{ solr_download_dir }}'
     - '{{ solr_install_dir }}'
     - '{{ solr_data_dir }}'
@@ -63,7 +63,7 @@
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/{{ item }}
     dest: '{{ solr_download_dir }}/{{ item }}'
     force: true
-  with_items:
+  loop:
     - KEYS
     - solr-{{ solr_version }}.tgz.asc
   when: solr_needs_install
