@@ -56,7 +56,7 @@ Whether to remove downloaded GPG keys file and .asc signature file after the ins
 List of Solr cores to configure. Possible keys:
 
 - **name**: Solr core name
-- **conf_path**: (optional) System path to a directory with core configuration. If omitted, default Solr core configuration will be used
+- **conf_path**: (optional) System path to a directory with core configuration on a remote host. If omitted, default Solr core configuration will be used
 
 ```
 solr_cores: []
