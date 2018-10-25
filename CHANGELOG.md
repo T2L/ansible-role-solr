@@ -1,6 +1,6 @@
 ## Ansible Role: Apache Solr 2.x.x
 
-- Replaced shell `cp` command with Ansible `synchronize` module for core configuration copying
+- Replaced shell `cp` command with Ansible `synchronize` module for core configuration copying. Config source directory must exist on the remote host (i.e. sync is being done on the remote host)
 - Significantly improve cores creation logic:
     * Role will create only missing cores
     * Core will be reloaded if it's configuration has changed since last sync
