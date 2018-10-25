@@ -1,9 +1,25 @@
 ---
 - hosts: all
   remote_user: root
+
+  pre_tasks:
+
+    - name: Ensure base packages are installed
+      apt:
+        name:
+          - libxml2-dev
+          - libxslt-dev
+          - python-dev
+          - python-lxml
+          - rsync
+        state: present
+        update_cache: yes
+        cache_valid_time: 86400
+
   roles:
     - T2L.java
     - ansible-role-solr
+
   vars:
     # Do not remove downloads in order to pass idempotence tests.
     solr_cleanup_downloads: false
