@@ -10,22 +10,50 @@
 
 - name: Set default core configuration path
   set_fact:
-    solr_default_core_conf_path: '{{ solr_install_dir }}/solr/example/files/conf/'
+    solr_default_core_conf_path: '{{ solr_install_dir }}/solr/example/files/conf'
 
-- name: Copy default configuration for all cores
-  command: 'cp -R {{ item.conf_path | default(solr_default_core_conf_path) }} {{ solr_data_dir }}/data/{{ item.name }}/'
-  args:
-    creates: '{{ solr_data_dir }}/data/{{ item.name }}/conf/solrconfig.xml'
+- name: Copy configuration for all defined cores
+  synchronize:
+    src: '{{ item.conf_path | default(solr_default_core_conf_path) }}/'
+    dest: '{{ solr_data_dir }}/data/{{ item.name }}/conf/'
+    checksum: yes
+    delete: yes
+    times: no
   loop: '{{ solr_cores }}'
-  register: solr_cores_configuration
+  register: solr_cores_configuration_sync
   become: yes
   become_user: '{{ solr_user }}'
 
-- name: Create configured cores
+- name: Get status of every defined core
+  uri:
+    url: http://localhost:{{ solr_port }}/solr/admin/cores?action=STATUS&indexInfo=false&core={{ item.name }}
+    return_content: yes
+  loop: '{{ solr_cores }}'
+  register: solr_cores_status_api_response
+
+- name: Parse cores status API response
+  xml:
+    xmlstring: '{{ solr_cores_status_api_response.results[index].content }}'
+    xpath: /response/lst[@name="status"]/lst[@name]/str[@name="name"]
+    count: yes
+  loop: '{{ solr_cores }}'
+  loop_control:
+    index_var: index
+  register: solr_cores_status
+
+- name: Create defined cores unless they exist already
   command: '{{ solr_install_dir }}/solr/bin/solr create -c {{ item.name }}'
-  when: "'skipped' not in solr_cores_configuration.results[index].stdout"
+  when: solr_cores_status.results[index].count == 0
   loop: '{{ solr_cores }}'
   loop_control:
     index_var: index
   become: yes
   become_user: '{{ solr_user }}'
+
+- name: Reload cores if their configuration has been changed
+  uri:
+    url: http://localhost:{{ solr_port }}/solr/admin/cores?action=RELOAD&core={{ item.name }}
+  loop: '{{ solr_cores }}'
+  loop_control:
+    index_var: index
+  when: solr_cores_configuration_sync.results[index].changed

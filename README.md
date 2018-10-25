@@ -1,6 +1,6 @@
 # Ansible Role: Apache Solr
 
-[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=2.0.0)](https://travis-ci.org/T2L/ansible-role-solr)
+[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=2.x.x)](https://travis-ci.org/T2L/ansible-role-solr)
 
 Installs Apache Solr 5+ on Ubuntu LTS.
 
@@ -13,7 +13,8 @@ Installs Apache Solr 5+ on Ubuntu LTS.
 
 ## Requirements
 
-Java must be installed.
+- Java must be installed on the managed machine (Solr is Java-based app)
+- Python library lxml >= 2.3.0 is required on the host machine that runs this role
 
 ## Role Variables
 
