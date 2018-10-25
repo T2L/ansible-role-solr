@@ -23,6 +23,7 @@
   register: solr_cores_configuration_sync
   become: yes
   become_user: '{{ solr_user }}'
+  delegate_to: '{{ inventory_hostname }}'
 
 - name: Get status of every defined core
   uri:
