@@ -13,8 +13,24 @@ Installs Apache Solr 5+ on Ubuntu LTS.
 
 ## Requirements
 
-- Java must be installed on the managed machine (Solr is Java-based app)
-- Python library lxml >= 2.3.0 is required on the host machine that runs this role
+### Local host (control machine)
+
+This role uses the following Ansible modules, which has specific requirements for the local host (i.e. control machine):
+
+- `synchronize`: copy core configuration to the Solr data directory. This module is a wrapper around `rsync`, so `rsync` must be installed on both the local and remote host
+- `xml`: parse response from Solr Admin API. This module requires `lxml >= 2.3.0` on the local host. See installation instructions here: https://lxml.de/installation.html
+
+### Remote host (target machine)
+
+- Java must be installed on the target machine (Solr is Java-based app). [T2L.java](https://galaxy.ansible.com/T2L/java) role can be used for this.
+
+This role relies on a set of tools/utilities/commands that must be available on the remote host. They will be automatically installed:
+
+- `curl` and `sed`: determine the closest available Apache Solr mirror
+- `gpg`: verify signature of downloaded Solr archive
+- `tar`: unpack downloaded Solr archive
+- `rsync`: synchronize core configuration
+- `lsof`: recommended for more stable start/stop of Solr
 
 ## Role Variables
 

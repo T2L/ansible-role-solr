@@ -6,6 +6,9 @@
       - curl
       - gnupg2
       - lsof
+      - rsync
+      - sed
+      - tar
     state: present
     update_cache: yes
     cache_valid_time: 86400
