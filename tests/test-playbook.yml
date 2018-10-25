@@ -13,4 +13,4 @@
     solr_cores:
       - name: drupal
       - name: wordpress
-        conf_path: /opt/solr/example/files/conf/
+        conf_path: /opt/solr/example/files/conf
