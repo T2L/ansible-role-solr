@@ -8,7 +8,6 @@
 
 - name: Check if Solr needs to be installed
   set_fact:
-    # yamllint disable-line rule:line-length
     solr_needs_install: "{{ solr_existing_version.rc != 0 or solr_existing_version.stdout != solr_version }}"
 
 # Oneliner borrowed here:
@@ -49,7 +48,6 @@
 # Download Solr from the closest mirror (won't work for archive releases).
 - name: Download Solr from the closest mirror
   get_url:
-    # yamllint disable-line rule:line-length
     url: '{{ solr_closest_mirror.stdout }}/{{ solr_version }}/solr-{{ solr_version }}.tgz'
     dest: '{{ solr_download_dest }}'
   register: solr_closest_mirror_result
@@ -59,14 +57,12 @@
 # Download Solr from the archive as backup.
 - name: Download Solr from the archive
   get_url:
-    # yamllint disable-line rule:line-length
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
   when: solr_needs_install and solr_closest_mirror_result.status_code != 200
 
 - name: Download the keys as well as the .asc signature file
   get_url:
-    # yamllint disable-line rule:line-length
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/{{ item }}
     dest: '{{ solr_download_dir }}/{{ item }}'
     force: true
@@ -81,7 +77,6 @@
   when: solr_needs_install
 
 - name: Verify the signatures
-  # yamllint disable-line rule:line-length
   command: gpg --verify {{ solr_download_dir }}/solr-{{ solr_version }}.tgz.asc {{ solr_download_dest }}
   changed_when: false
   when: solr_needs_install
@@ -91,7 +86,6 @@
     src: '{{ solr_download_dest }}'
     dest: '{{ solr_download_dir }}'
     remote_src: true
-    # yamllint disable-line rule:line-length
     creates: '{{ solr_download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh'
   when: solr_needs_install
 
