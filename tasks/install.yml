@@ -14,7 +14,7 @@
 # Oneliner borrowed here:
 # https://github.com/jiv-e/ansible-multicore-solr/blob/master/roles/jiv_e.solr/tasks/install-solr.yml#L15
 - name: Get the closest mirror for Apache Solr
-  shell: >
+  shell: |
     set -o pipefail
     curl -s http://www.apache.org/dyn/closer.cgi/lucene/solr |
     sed -n '/id="http"/,/id="backup"/p' |
@@ -62,7 +62,7 @@
     # yamllint disable-line rule:line-length
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
-  when: solr_needs_install and solr_closest_mirror_result.state == 'absent'
+  when: solr_needs_install and solr_closest_mirror_result.status_code != 200
 
 - name: Download the keys as well as the .asc signature file
   get_url:
