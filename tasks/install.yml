@@ -15,7 +15,7 @@
 - name: Get the closest mirror for Apache Solr
   shell: |
     set -o pipefail
-    curl -s http://www.apache.org/dyn/closer.cgi/lucene/solr |
+    curl -s https://www.apache.org/dyn/closer.cgi/lucene/solr |
     sed -n '/id="http"/,/id="backup"/p' |
     sed -nr 's/.*href=\"(.*)\".*/\1/p' |
     sed -n '2,${/https\?:\/\//p;q}'
@@ -57,18 +57,22 @@
 # Download Solr from the archive as backup.
 - name: Download Solr from the archive
   get_url:
-    url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
+    url: https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
   when: solr_needs_install and solr_closest_mirror_result.status_code != 200
 
-- name: Download the keys as well as the .asc signature file
+- name: Download the keys
   get_url:
-    url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/{{ item }}
-    dest: '{{ solr_download_dir }}/{{ item }}'
+    url: https://archive.apache.org/dist/lucene/solr/KEYS
+    dest: '{{ solr_download_dir }}/KEYS'
     force: true
-  loop:
-    - KEYS
-    - solr-{{ solr_version }}.tgz.asc
+  when: solr_needs_install
+
+- name: Download the .asc signature file
+  get_url:
+    url: https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz.asc
+    dest: '{{ solr_download_dir }}/solr-{{ solr_version }}.tgz.asc'
+    force: true
   when: solr_needs_install
 
 - name: Import GPG keys
