@@ -15,6 +15,7 @@
 # https://github.com/jiv-e/ansible-multicore-solr/blob/master/roles/jiv_e.solr/tasks/install-solr.yml#L15
 - name: Get the closest mirror for Apache Solr
   shell: >
+    set -o pipefail
     curl -s http://www.apache.org/dyn/closer.cgi/lucene/solr |
     sed -n '/id="http"/,/id="backup"/p' |
     sed -nr 's/.*href=\"(.*)\".*/\1/p' |
@@ -22,6 +23,7 @@
   # Skip Ansible Lint check, as it not really possible to achieve the same
   # functionality with modules.
   args:
+    executable: /bin/bash
     warn: false
   register: solr_closest_mirror
   changed_when: false

@@ -25,6 +25,8 @@
   become: true
   become_user: '{{ solr_user }}'
   delegate_to: '{{ inventory_hostname }}'
+  notify:
+    - Reload cores if their configuration has been changed
 
 - name: Get status of every defined core
   uri:
@@ -52,12 +54,3 @@
     index_var: index
   become: true
   become_user: '{{ solr_user }}'
-
-- name: Reload cores if their configuration has been changed
-  uri:
-    # yamllint disable-line rule:line-length
-    url: http://localhost:{{ solr_port }}/solr/admin/cores?action=RELOAD&core={{ item.name }}
-  loop: '{{ solr_cores }}'
-  loop_control:
-    index_var: index
-  when: solr_cores_configuration_sync.results[index].changed
