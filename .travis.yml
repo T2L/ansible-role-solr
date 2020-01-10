@@ -5,6 +5,8 @@ jobs:
   include:
     - &Test
 
+      name: Ubuntu 16.04 / Ansible 2.7 / Solr 6.6.6
+
       os: linux
 
       dist: xenial
@@ -16,7 +18,7 @@ jobs:
 
       python: 3.6
 
-      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.7.*
+      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.7.* SOLR_VERSION=6.6.6
 
       install:
         - pip install ansible==${ANSIBLE_VERSION} docker molecule
@@ -26,15 +28,15 @@ jobs:
 
     - <<: *Test
 
-      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.7.*
+      name: Ubuntu 16.04 / Ansible 2.8 / Solr 7.7.2
+
+      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.8.* SOLR_VERSION=7.7.2
 
     - <<: *Test
 
-      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.8.*
+      name: Ubuntu 18.04 / Ansible 2.9 / Solr 8.4.0
 
-    - <<: *Test
-
-      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.9.*
+      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.9.* SOLR_VERSION=8.4.0
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

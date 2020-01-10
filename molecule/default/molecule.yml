@@ -26,5 +26,7 @@ provisioner:
       remote_tmp: /tmp/ansible
     ssh_connection:
       pipelining: true
+  ansible_args:
+    - --extra-vars="solr_version=${SOLR_VERSION}"
   lint:
     name: ansible-lint
