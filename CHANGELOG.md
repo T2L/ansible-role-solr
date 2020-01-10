@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr 2.x.x
+
+- [#6](https://github.com/T2L/ansible-role-solr/issues/6) - Added support of Solr 7.5.0+
+
 ## Ansible Role: Apache Solr 2.0.1, 2018-10-26
 
 - Replaced shell `cp` command with Ansible `synchronize` module for core configuration copying. Config source directory must exist on the remote host (i.e. sync is being done on the remote host)

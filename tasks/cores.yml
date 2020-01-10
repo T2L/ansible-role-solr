@@ -29,7 +29,7 @@
 
 - name: Get status of every defined core
   uri:
-    url: http://localhost:{{ solr_port }}/solr/admin/cores?action=STATUS&indexInfo=false&core={{ item.name }}
+    url: http://localhost:{{ solr_port }}/solr/admin/cores?action=STATUS&indexInfo=false&core={{ item.name }}&wt=xml
     return_content: true
   loop: '{{ solr_cores }}'
   register: solr_cores_status_api_response
