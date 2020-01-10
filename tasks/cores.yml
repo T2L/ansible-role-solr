@@ -16,19 +16,21 @@
   synchronize:
     src: '{{ item.conf_path | default(solr_default_core_conf_path) }}/'
     dest: '{{ solr_data_dir }}/data/{{ item.name }}/conf/'
-    checksum: yes
-    delete: yes
-    times: no
+    checksum: true
+    delete: true
+    times: false
   loop: '{{ solr_cores }}'
   register: solr_cores_configuration_sync
-  become: yes
+  become: true
   become_user: '{{ solr_user }}'
   delegate_to: '{{ inventory_hostname }}'
+  notify:
+    - Reload cores if their configuration has been changed
 
 - name: Get status of every defined core
   uri:
     url: http://localhost:{{ solr_port }}/solr/admin/cores?action=STATUS&indexInfo=false&core={{ item.name }}
-    return_content: yes
+    return_content: true
   loop: '{{ solr_cores }}'
   register: solr_cores_status_api_response
 
@@ -36,7 +38,7 @@
   xml:
     xmlstring: '{{ solr_cores_status_api_response.results[index].content }}'
     xpath: /response/lst[@name="status"]/lst[@name]/str[@name="name"]
-    count: yes
+    count: true
   loop: '{{ solr_cores }}'
   loop_control:
     index_var: index
@@ -48,13 +50,5 @@
   loop: '{{ solr_cores }}'
   loop_control:
     index_var: index
-  become: yes
+  become: true
   become_user: '{{ solr_user }}'
-
-- name: Reload cores if their configuration has been changed
-  uri:
-    url: http://localhost:{{ solr_port }}/solr/admin/cores?action=RELOAD&core={{ item.name }}
-  loop: '{{ solr_cores }}'
-  loop_control:
-    index_var: index
-  when: solr_cores_configuration_sync.results[index].changed

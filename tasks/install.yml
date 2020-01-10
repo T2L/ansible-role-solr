@@ -10,9 +10,11 @@
   set_fact:
     solr_needs_install: "{{ solr_existing_version.rc != 0 or solr_existing_version.stdout != solr_version }}"
 
-# Oneliner borrowed here: https://github.com/jiv-e/ansible-multicore-solr/blob/master/roles/jiv_e.solr/tasks/install-solr.yml#L15
+# Oneliner borrowed here:
+# https://github.com/jiv-e/ansible-multicore-solr/blob/master/roles/jiv_e.solr/tasks/install-solr.yml#L15
 - name: Get the closest mirror for Apache Solr
-  shell: >
+  shell: |
+    set -o pipefail
     curl -s http://www.apache.org/dyn/closer.cgi/lucene/solr |
     sed -n '/id="http"/,/id="backup"/p' |
     sed -nr 's/.*href=\"(.*)\".*/\1/p' |
@@ -20,6 +22,7 @@
   # Skip Ansible Lint check, as it not really possible to achieve the same
   # functionality with modules.
   args:
+    executable: /bin/bash
     warn: false
   register: solr_closest_mirror
   changed_when: false
@@ -56,7 +59,7 @@
   get_url:
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
-  when: solr_needs_install and solr_closest_mirror_result.state == 'absent'
+  when: solr_needs_install and solr_closest_mirror_result.status_code != 200
 
 - name: Download the keys as well as the .asc signature file
   get_url:
@@ -101,7 +104,7 @@
   service:
     name: solr
     state: started
-    enabled: yes
+    enabled: true
     use: service
 
 - name: Add Solr bin directory to global $PATH
