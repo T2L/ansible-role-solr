@@ -1,6 +1,7 @@
 ## Ansible Role: Apache Solr 2.x.x
 
 - [#6](https://github.com/T2L/ansible-role-solr/issues/6) - Added support of Solr 7.5.0+
+- [#7](https://github.com/T2L/ansible-role-solr/issues/7) - Fixed Ansible 2.8 deprecations in T2L.Java role (used by tests)
 
 ## Ansible Role: Apache Solr 2.0.1, 2018-10-26
 
