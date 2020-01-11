@@ -27,6 +27,15 @@
     - ansible-role-solr
 
   vars:
+    # Older Solr versions might not work properly with OpenJDK 11. Let's stick
+    # to the JDK 8.
+    java_openjdk_packages:
+      - version: 8
+        type: jre
+    java_default_alternative:
+      provider: openjdk
+      version: 8
+
     # Do not remove downloads in order to pass idempotence tests.
     solr_cleanup_downloads: false
     solr_cleanup_gpg: false
