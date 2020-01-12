@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr 2.x.x
+## Ansible Role: Apache Solr 2.1.0, 2020-01-12
 
 - [#12](https://github.com/T2L/ansible-role-solr/issues/12) - Bump default Solr version to 7.7.2
 - [#6](https://github.com/T2L/ansible-role-solr/issues/6) - Added support of Solr 7.5.0+
