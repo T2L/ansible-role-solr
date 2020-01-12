@@ -9,6 +9,7 @@ lint:
   name: yamllint
   options:
     config-data:
+      extends: default
       rules:
         line-length: disable
 platforms:
