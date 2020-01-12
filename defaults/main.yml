@@ -4,7 +4,7 @@ solr_user: solr
 solr_group: "{{ solr_user }}"
 
 # Solr version to install. Minimum supported version is 5.0.0.
-solr_version: 6.6.5
+solr_version: 7.7.2
 
 # Port Solr should bind to.
 solr_port: 8983
