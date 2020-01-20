@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr 2.x.x
+
+- [#14](https://github.com/T2L/ansible-role-solr/issues/14) - Workaround get_url Ansible module being unreliable (as well as Apache mirrors)"
+
 ## Ansible Role: Apache Solr 2.1.0, 2020-01-12
 
 - [#12](https://github.com/T2L/ansible-role-solr/issues/12) - Bump default Solr version to 7.7.2

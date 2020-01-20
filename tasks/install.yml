@@ -25,7 +25,7 @@
     executable: /bin/bash
     warn: false
   register: solr_closest_mirror
-  changed_when: false
+  changed_when: solr_needs_install
   when: solr_needs_install
 
 # Make sure all directories exist
@@ -42,7 +42,7 @@
 - name: Set download destination
   set_fact:
     solr_download_dest: '{{ solr_download_dir }}/solr-{{ solr_version }}.tgz'
-  changed_when: false
+  changed_when: solr_needs_install
   when: solr_needs_install
 
 # Download Solr from the closest mirror (won't work for archive releases).
@@ -59,7 +59,7 @@
   get_url:
     url: https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
-  when: solr_needs_install and solr_closest_mirror_result.status_code != 200
+  when: solr_needs_install and ('status_code' not in solr_closest_mirror_result or solr_closest_mirror_result.status_code != 200)
 
 - name: Download the keys
   get_url:
