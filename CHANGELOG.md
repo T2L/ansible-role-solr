@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr 2.x.x
+## Ansible Role: Apache Solr 2.1.1, 2020-01-21
 
 - [#15](https://github.com/T2L/ansible-role-solr/issues/15) - Run Travis on 2.x.x, tags and PR; test role using Solr 8.4.1
 - [#14](https://github.com/T2L/ansible-role-solr/issues/14) - Workaround get_url Ansible module being unreliable (as well as Apache mirrors)"
