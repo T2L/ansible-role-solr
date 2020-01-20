@@ -1,4 +1,9 @@
 ---
+branches:
+  only:
+    - 2.x.x
+    - /^\d+\.\d+\.\d+$/
+
 jobs:
   fast_finish: true
 
@@ -34,9 +39,9 @@ jobs:
 
     - <<: *Test
 
-      name: Ubuntu 18.04 / Ansible 2.9 / Solr 8.4.0
+      name: Ubuntu 18.04 / Ansible 2.9 / Solr 8.4.1
 
-      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.9.* SOLR_VERSION=8.4.0
+      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.9.* SOLR_VERSION=8.4.1
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
