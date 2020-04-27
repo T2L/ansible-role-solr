@@ -10,7 +10,7 @@ jobs:
   include:
     - &Test
 
-      name: Ubuntu 14.04 / Ansible 2.8 / Solr 6.6.6
+      name: Ubuntu 16.04 / Ansible 2.8 / Solr 7.7.2
 
       os: linux
 
@@ -23,19 +23,13 @@ jobs:
 
       python: 3.6
 
-      env: MOLECULE_PLATFORM=ubuntu:14.04 ANSIBLE_VERSION=2.9.* SOLR_VERSION=6.6.6
+      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.8.* SOLR_VERSION=7.7.2
 
       install:
         - pip install ansible==${ANSIBLE_VERSION} ansible-lint docker molecule==3.*
 
       script:
         - molecule test
-
-    - <<: *Test
-
-      name: Ubuntu 16.04 / Ansible 2.8 / Solr 7.7.2
-
-      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.8.* SOLR_VERSION=7.7.2
 
     - <<: *Test
 
