@@ -5,13 +5,10 @@ dependency:
     role-file: molecule/default/requirements.yml
 driver:
   name: docker
-lint:
-  name: yamllint
-  options:
-    config-data:
-      extends: default
-      rules:
-        line-length: disable
+lint: |
+  set -e
+  yamllint --config-data "{extends: default, rules: {line-length: disable}}" .
+  ansible-lint
 platforms:
   - name: draft
     image: "${MOLECULE_PLATFORM}"
@@ -35,5 +32,3 @@ provisioner:
     group_vars:
       all:
         solr_version: ${SOLR_VERSION}
-  lint:
-    name: ansible-lint
