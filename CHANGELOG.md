@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr (unreleased)
+
+- [#18](https://github.com/T2L/ansible-role-solr/issues/18) - Add Ubuntu 20.04 support (testing with Solr 8.5.1)
+
 ## Ansible Role: Apache Solr 2.1.1, 2020-01-21
 
 - [#15](https://github.com/T2L/ansible-role-solr/issues/15) - Run Travis on 2.x.x, tags and PR; test role using Solr 8.4.1
