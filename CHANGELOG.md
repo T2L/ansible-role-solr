@@ -1,5 +1,6 @@
 ## Ansible Role: Apache Solr (unreleased)
 
+- [#23](https://github.com/T2L/ansible-role-solr/issues/23) - Bump default Solr version to 7.7.3
 - [#18](https://github.com/T2L/ansible-role-solr/issues/18) - Add Ubuntu 20.04 support (testing with Solr 8.5.1)
 - [#17](https://github.com/T2L/ansible-role-solr/issues/17) - Add Molecule 3 support
 
