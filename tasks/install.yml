@@ -63,7 +63,7 @@
 
 - name: Download the keys
   get_url:
-    url: https://archive.apache.org/dist/lucene/solr/KEYS
+    url: https://downloads.apache.org/lucene/KEYS
     dest: '{{ solr_download_dir }}/KEYS'
     force: true
   when: solr_needs_install
