@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr (unreleased)
+## Ansible Role: Apache Solr 2.2.0, 2020-04-27
 
 - [#26](https://github.com/T2L/ansible-role-solr/issues/26) - Bump T2L.java version to 1.3.0 on Travis
 - [#23](https://github.com/T2L/ansible-role-solr/issues/23) - Bump default Solr version to 7.7.3

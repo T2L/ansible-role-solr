@@ -1,6 +1,6 @@
 # Ansible Role: Apache Solr
 
-[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=2.1.1)](https://travis-ci.org/T2L/ansible-role-solr)
+[![Build Status](https://travis-ci.org/T2L/ansible-role-solr.svg?branch=2.2.0)](https://travis-ci.org/T2L/ansible-role-solr)
 
 Installs Apache Solr 5+ on Ubuntu LTS.
 
@@ -8,8 +8,8 @@ Installs Apache Solr 5+ on Ubuntu LTS.
 
 - Fast downloads: tries to download Solr from the closest mirror (works for latest releases only), fallback to archive
 - Verification of the integrity of the files
-- Supports Ubuntu 14.04, 16.04 and 18.04 only
-- Testing with [Molecule](https://github.com/metacloud/molecule)
+- Supports Ubuntu 16.04, 18.04 and 20.04 only
+- Testing with [Molecule 3](https://github.com/ansible-community/molecule)
 
 ## Requirements
 
