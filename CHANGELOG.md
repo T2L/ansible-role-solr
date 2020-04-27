@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr (unreleased)
+
+- [#17](https://github.com/T2L/ansible-role-solr/issues/17) - Add Molecule 3 support
+
 ## Ansible Role: Apache Solr 2.1.1, 2020-01-21
 
 - [#15](https://github.com/T2L/ansible-role-solr/issues/15) - Run Travis on 2.x.x, tags and PR; test role using Solr 8.4.1
