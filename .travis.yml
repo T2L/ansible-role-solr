@@ -26,7 +26,7 @@ jobs:
       env: MOLECULE_PLATFORM=ubuntu:14.04 ANSIBLE_VERSION=2.7.* SOLR_VERSION=6.6.6
 
       install:
-        - pip install ansible==${ANSIBLE_VERSION} docker molecule
+        - pip install ansible==${ANSIBLE_VERSION} ansible-lint docker molecule==3.*
 
       script:
         - molecule test
