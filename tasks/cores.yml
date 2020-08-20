@@ -8,6 +8,8 @@
     recurse: true
     mode: 0755
   loop: '{{ solr_cores }}'
+  tags:
+    - molecule-idempotence-notest
 
 - name: Set default core configuration path
   set_fact:
@@ -27,6 +29,8 @@
   delegate_to: '{{ inventory_hostname }}'
   notify:
     - Reload cores if their configuration has been changed
+  tags:
+    - molecule-idempotence-notest
 
 - name: Get status of every defined core
   uri:
