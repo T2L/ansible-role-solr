@@ -50,6 +50,7 @@
   get_url:
     url: '{{ solr_closest_mirror.stdout }}/{{ solr_version }}/solr-{{ solr_version }}.tgz'
     dest: '{{ solr_download_dest }}'
+    mode: 0644
   register: solr_closest_mirror_result
   failed_when: false
   when: solr_needs_install
@@ -59,6 +60,7 @@
   get_url:
     url: https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest: '{{ solr_download_dest }}'
+    mode: 0644
   when: solr_needs_install and ('status_code' not in solr_closest_mirror_result or solr_closest_mirror_result.status_code != 200)
 
 - name: Download the keys
@@ -66,6 +68,7 @@
     url: https://downloads.apache.org/lucene/KEYS
     dest: '{{ solr_download_dir }}/KEYS'
     force: true
+    mode: 0644
   when: solr_needs_install
 
 - name: Download the .asc signature file
@@ -73,6 +76,7 @@
     url: https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz.asc
     dest: '{{ solr_download_dir }}/solr-{{ solr_version }}.tgz.asc'
     force: true
+    mode: 0644
   when: solr_needs_install
 
 - name: Import GPG keys
@@ -91,6 +95,7 @@
     dest: '{{ solr_download_dir }}'
     remote_src: true
     creates: '{{ solr_download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh'
+    mode: 0744
   when: solr_needs_install
 
 - name: Run Solr installation script
