@@ -6,6 +6,7 @@
     owner: '{{ solr_user }}'
     group: '{{ solr_group }}'
     recurse: true
+    mode: 0755
   loop: '{{ solr_cores }}'
 
 - name: Set default core configuration path

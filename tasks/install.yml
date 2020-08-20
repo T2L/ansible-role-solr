@@ -29,12 +29,19 @@
   when: solr_needs_install
 
 # Make sure all directories exist
-- name: Make sure all directories exist
+- name: Make sure download directory exists
   file:
-    path: "{{ item }}"
+    path: '{{ solr_download_dir }}'
     state: directory
+    mode: 0777
+  when: solr_needs_install
+
+- name: Make sure install & data directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
   loop:
-    - '{{ solr_download_dir }}'
     - '{{ solr_install_dir }}'
     - '{{ solr_data_dir }}'
   when: solr_needs_install
