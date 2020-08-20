@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr (Unreleased)
+## Ansible Role: Apache Solr 2.2.1, 2020-08-20
 
 - [#28](https://github.com/T2L/ansible-role-solr/issues/28) - Address newly introduced Ansible Lint "[208] File permissions not mentioned" message. Update Travis configuration (new Ansible & Solr versions)
 
