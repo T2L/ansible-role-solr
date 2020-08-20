@@ -10,7 +10,7 @@ lint: |
   yamllint --config-data "{extends: default, rules: {line-length: disable}}" .
   ansible-lint
 platforms:
-  - name: draft
+  - name: t2l.solr
     image: "${MOLECULE_PLATFORM}"
     capabilities:
       - SYS_ADMIN

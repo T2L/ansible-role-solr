@@ -7,6 +7,8 @@
     - '{{ solr_download_dest }}'
     - '{{ solr_download_dir }}/solr-{{ solr_version }}'
   when: solr_cleanup_downloads
+  tags:
+    - molecule-idempotence-notest
 
 - name: Remove GPG keys and signature files
   file:
@@ -16,3 +18,5 @@
     - '{{ solr_download_dir }}/KEYS'
     - '{{ solr_download_dir }}/solr-{{ solr_version }}.tgz.asc'
   when: solr_cleanup_gpg
+  tags:
+    - molecule-idempotence-notest
