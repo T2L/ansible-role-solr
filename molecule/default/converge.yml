@@ -22,8 +22,8 @@
         update_cache: true
 
   roles:
-    - T2L.java
-    - ansible-role-solr
+    - t2l.java
+    - t2l.solr
 
   vars:
     ansible_python_interpreter: /usr/bin/python3

@@ -1,3 +1,7 @@
+## Ansible Role: Apache Solr (Unreleased)
+
+- [#30](https://github.com/T2L/ansible-role-solr/pull/30 - Make Travis CI green again
+
 ## Ansible Role: Apache Solr 2.2.1, 2020-08-20
 
 - [#28](https://github.com/T2L/ansible-role-solr/issues/28) - Address newly introduced Ansible Lint "[208] File permissions not mentioned" message. Update Travis configuration (new Ansible & Solr versions)

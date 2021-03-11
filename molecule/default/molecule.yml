@@ -2,12 +2,13 @@
 dependency:
   name: galaxy
   options:
-    role-file: molecule/default/requirements.yml
+    roles-path: ~/.ansible/roles
+    role-file: molecule/requirements.yml
 driver:
   name: docker
 lint: |
   set -e
-  yamllint --config-data "{extends: default, rules: {line-length: disable}}" .
+  yamllint .
   ansible-lint
 platforms:
   - name: t2l.solr
