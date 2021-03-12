@@ -1,4 +1,8 @@
 ---
+os: linux
+dist: xenial
+language: python
+
 branches:
   only:
     - 2.x.x
@@ -10,7 +14,7 @@ jobs:
   include:
     - &Test
 
-      name: Ubuntu 16.04 / Ansible 2.8 / Solr 7.7.3
+      name: Ubuntu 16.04 / Ansible 2.9 / Solr 6.6.6
 
       os: linux
 
@@ -21,9 +25,9 @@ jobs:
 
       language: python
 
-      python: 3.6
+      python: 3.9
 
-      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.8 SOLR_VERSION=7.7.3
+      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.9 SOLR_VERSION=6.6.6
 
       before_install:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -32,22 +36,29 @@ jobs:
         - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
       install:
-        - pip install ansible~=${ANSIBLE_VERSION} ansible-lint docker molecule~=3.0.8
+        - pip install ansible~=${ANSIBLE_VERSION} ansible-lint docker molecule~=3.2 molecule-docker
+
+      before_script:
+        - mkdir -p ~/.ansible/roles
+        - ln -s `pwd` ~/.ansible/roles/t2l.solr
 
       script:
         - molecule test
 
     - <<: *Test
 
-      name: Ubuntu 18.04 / Ansible 2.9 / Solr 8.5.2
+      name: Ubuntu 18.04 / Ansible 2.10 / Solr 7.7.3
 
-      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.9 SOLR_VERSION=8.5.2
+      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.10 SOLR_VERSION=7.7.3
 
     - <<: *Test
 
-      name: Ubuntu 20.04 / Ansible 2.10 / Solr 8.6.1
+      name: Ubuntu 20.04 / Ansible (latest) / Solr 8.8.1
 
-      env: MOLECULE_PLATFORM=ubuntu:20.04 ANSIBLE_VERSION=2.10.0a1 SOLR_VERSION=8.6.1
+      env: MOLECULE_PLATFORM=ubuntu:20.04 SOLR_VERSION=8.8.1
+
+      install:
+        - pip install ansible ansible-lint docker molecule molecule-docker
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
