@@ -1,4 +1,4 @@
-## Ansible Role: Apache Solr (Unreleased)
+## Ansible Role: Apache Solr 2.2.2, 2021-03-12
 
 - [#30](https://github.com/T2L/ansible-role-solr/pull/30 - Make Travis CI green again
 
