@@ -22,7 +22,7 @@ This role uses the following Ansible modules, which has specific requirements fo
 
 ### Remote host (target machine)
 
-- Java must be installed on the target machine (Solr is Java-based app). [T2L.java](https://galaxy.ansible.com/T2L/java) role can be used for this.
+- Java must be installed on the target machine (Solr is Java-based app). [t2l.java](https://galaxy.ansible.com/T2L/java) role can be used for this.
 
 This role relies on a set of tools/utilities/commands that must be available on the remote host. They will be automatically installed:
 
@@ -89,7 +89,7 @@ Example (do not forget to remove square brackets):
 
     - hosts: all
       roles:
-        - T2L.solr
+        - t2l.solr
 
 ## License
 
@@ -97,7 +97,7 @@ MIT
 
 ## Author Information
 
-This role was created in 2017-2020 by Roman Paska.
+This role was created in 2017-2021 by Roman Paska.
 
 ## Changelog
 
