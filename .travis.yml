@@ -14,7 +14,7 @@ jobs:
   include:
     - &Test
 
-      name: Ubuntu 16.04 / Ansible 2.9 / Solr 7.7.3
+      name: Ubuntu 16.04 / Ansible 2.9 / Solr 6.6.6
 
       os: linux
 
@@ -27,7 +27,7 @@ jobs:
 
       python: 3.9
 
-      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.8 SOLR_VERSION=7.7.3
+      env: MOLECULE_PLATFORM=ubuntu:16.04 ANSIBLE_VERSION=2.9 SOLR_VERSION=6.6.6
 
       before_install:
         - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -47,9 +47,9 @@ jobs:
 
     - <<: *Test
 
-      name: Ubuntu 18.04 / Ansible 2.10 / Solr 8.8.0
+      name: Ubuntu 18.04 / Ansible 2.10 / Solr 7.7.3
 
-      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.10 SOLR_VERSION=8.8.0
+      env: MOLECULE_PLATFORM=ubuntu:18.04 ANSIBLE_VERSION=2.10 SOLR_VERSION=7.7.3
 
     - <<: *Test
 
